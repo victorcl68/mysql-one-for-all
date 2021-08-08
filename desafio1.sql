@@ -75,14 +75,7 @@ VALUES
 (3, 'Hallowed Steam'),
 (4, 'Incandescent'),
 (5, 'Temporary Culture');
-    
-INSERT INTO usuarios (usuario_id, usuario, idade, plano_id)
-VALUES
-(1, 'Thati', 23, 1),
-(2, 'Cintia', 35, 2),
-(3, 'Bill', 20, 3),
-(4, 'Roger', 45, 1);
-    
+
 INSERT INTO artistas (artista_id, artista)
 VALUES 
 (1, 'Walter Phoenix'),
@@ -95,6 +88,13 @@ VALUES
 (1, 'gratuito', 0.00),
 (2, 'familiar', 7.99),
 (3, 'universitário', 5.99);
+
+INSERT INTO usuarios (usuario_id, usuario, idade, plano_id)
+VALUES
+(1, 'Thati', 23, 1),
+(2, 'Cintia', 35, 2),
+(3, 'Bill', 20, 3),
+(4, 'Roger', 45, 1);
     
 INSERT INTO albuns_artistas (album_id, artista_id)
 VALUES
