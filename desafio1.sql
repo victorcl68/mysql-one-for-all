@@ -13,7 +13,7 @@ CREATE TABLE artistas (
 CREATE TABLE planos (
   plano_id INT NOT NULL AUTO_INCREMENT,
   plano VARCHAR(25),
-  valor_plano DOUBLE,
+  valor_plano DECIMAL(5,2) NOT NULL,
   PRIMARY KEY (plano_id)
 ) ENGINE=InnoDB;
 
@@ -66,9 +66,9 @@ VALUES
 
 INSERT INTO planos (plano_id, plano, valor_plano)
 VALUES
-(1, 'gratuito', 0.00),
+(1, 'gratuito', 0),
 (2, 'familiar', 7.99),
-(3, 'universitário', 5.99);
+(3, 'universitario', 5.99);
 
 INSERT INTO albuns (album_id, album, artista_id)
 VALUES
