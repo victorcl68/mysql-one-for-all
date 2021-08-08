@@ -27,7 +27,9 @@ CREATE TABLE usuarios (
   usuario_id INT NOT NULL AUTO_INCREMENT,
   usuario VARCHAR(15),
   idade INT,
-  PRIMARY KEY (usuario_id)
+  plano_id INT NOT NULL,
+  PRIMARY KEY (usuario_id),
+  FOREIGN KEY (plano_id) REFERENCES planos(plano_id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE albuns_artistas (
@@ -74,12 +76,12 @@ VALUES
 (4, 'Incandescent'),
 (5, 'Temporary Culture');
     
-INSERT INTO usuarios (usuario_id, usuario, idade)
+INSERT INTO usuarios (usuario_id, usuario, idade, plano_id)
 VALUES
-(1, 'Thati', 23),
-(2, 'Cintia', 35),
-(3, 'Bill', 20),
-(4, 'Roger', 45);
+(1, 'Thati', 23, 1),
+(2, 'Cintia', 35, 2),
+(3, 'Bill', 20, 3),
+(4, 'Roger', 45, 1);
     
 INSERT INTO artistas (artista_id, artista)
 VALUES 
