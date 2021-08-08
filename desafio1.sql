@@ -43,6 +43,7 @@ CREATE TABLE albuns_artistas (
 CREATE TABLE albuns_cancoes (
   album_id INT NOT NULL,
   cancoes VARCHAR(35),
+  PRIMARY KEY (cancoes),
   FOREIGN KEY (album_id) REFERENCES albuns (album_id)
 ) ENGINE=InnoDB;
 
@@ -57,15 +58,8 @@ CREATE TABLE usuarios_artistas (
 CREATE TABLE usuarios_historico (
   usuario_id INT NOT NULL,
   historico_de_reproducoes VARCHAR(35),
-  FOREIGN KEY (usuario_id) REFERENCES usuarios (usuario_id)
-) ENGINE=InnoDB;
-
-CREATE TABLE usuarios_planos (
-  usuario_id INT NOT NULL,
-  plano_id INT NOT NULL,
-  PRIMARY KEY (usuario_id, plano_id),
   FOREIGN KEY (usuario_id) REFERENCES usuarios (usuario_id),
-  FOREIGN KEY (plano_id) REFERENCES planos (plano_id)
+  FOREIGN KEY (historico_de_reproducoes) REFERENCES albuns_cancoes (cancoes)
 ) ENGINE=InnoDB;
 
 INSERT INTO albuns (album_id, album)
@@ -152,10 +146,3 @@ VALUES
 (4, 'Dance With Her Own'),
 (4, 'Without My Streets'),
 (4, 'Celebration Of More');
-    
-INSERT INTO usuarios_planos (usuario_id, plano_id)
-VALUES
-(1, 1),
-(4, 1),
-(2, 2),
-(3, 3);
