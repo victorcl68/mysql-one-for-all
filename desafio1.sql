@@ -4,12 +4,6 @@ CREATE DATABASE SpotifyClone;
 
 USE SpotifyClone;
 
-CREATE TABLE albuns (
-  album_id INT NOT NULL AUTO_INCREMENT,
-  album VARCHAR(30),
-  PRIMARY KEY (album_id)
-) ENGINE=InnoDB;
-
 CREATE TABLE artistas (
   artista_id INT NOT NULL AUTO_INCREMENT,
   artista VARCHAR(30),
@@ -23,6 +17,14 @@ CREATE TABLE planos (
   PRIMARY KEY (plano_id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE albuns (
+  album_id INT NOT NULL AUTO_INCREMENT,
+  album VARCHAR(30),
+  artista_id INT NOT NULL,
+  PRIMARY KEY (album_id),
+  FOREIGN KEY (artista_id) REFERENCES artistas(artista_id)
+) ENGINE=InnoDB;
+
 CREATE TABLE usuarios (
   usuario_id INT NOT NULL AUTO_INCREMENT,
   usuario VARCHAR(15),
@@ -30,14 +32,6 @@ CREATE TABLE usuarios (
   plano_id INT NOT NULL,
   PRIMARY KEY (usuario_id),
   FOREIGN KEY (plano_id) REFERENCES planos(plano_id)
-) ENGINE=InnoDB;
-
-CREATE TABLE albuns_artistas (
-  album_id INT NOT NULL,
-  artista_id INT NOT NULL,
-  PRIMARY KEY (album_id, artista_id),
-  FOREIGN KEY (album_id) REFERENCES albuns (album_id),
-  FOREIGN KEY (artista_id) REFERENCES artistas (artista_id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE albuns_cancoes (
@@ -58,17 +52,10 @@ CREATE TABLE usuarios_artistas (
 CREATE TABLE usuarios_historico (
   usuario_id INT NOT NULL,
   historico_de_reproducoes VARCHAR(35),
+  PRIMARY KEY (usuario_id, historico_de_reproducoes),
   FOREIGN KEY (usuario_id) REFERENCES usuarios (usuario_id),
   FOREIGN KEY (historico_de_reproducoes) REFERENCES albuns_cancoes (cancoes)
 ) ENGINE=InnoDB;
-
-INSERT INTO albuns (album_id, album)
-VALUES
-(1, 'Envious'),
-(2, 'Exuberant'),
-(3, 'Hallowed Steam'),
-(4, 'Incandescent'),
-(5, 'Temporary Culture');
 
 INSERT INTO artistas (artista_id, artista)
 VALUES 
@@ -76,12 +63,20 @@ VALUES
 (2, 'Peter Strong'),
 (3, 'Lance Day'),
 (4, 'Freedie Shannon');
-    
+
 INSERT INTO planos (plano_id, plano, valor_plano)
 VALUES
 (1, 'gratuito', 0.00),
 (2, 'familiar', 7.99),
 (3, 'universitário', 5.99);
+
+INSERT INTO albuns (album_id, album, artista_id)
+VALUES
+(1, 'Envious', 1),
+(2, 'Exuberant', 1),
+(3, 'Hallowed Steam', 2),
+(4, 'Incandescent', 3),
+(5, 'Temporary Culture', 4);
 
 INSERT INTO usuarios (usuario_id, usuario, idade, plano_id)
 VALUES
@@ -89,14 +84,6 @@ VALUES
 (2, 'Cintia', 35, 2),
 (3, 'Bill', 20, 3),
 (4, 'Roger', 45, 1);
-    
-INSERT INTO albuns_artistas (album_id, artista_id)
-VALUES
-(1, 1),
-(2, 1),
-(3, 2),
-(4, 3),
-(5, 4);
     
 INSERT INTO albuns_cancoes (album_id, cancoes)
 VALUES
